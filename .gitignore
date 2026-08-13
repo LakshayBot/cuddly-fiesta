@@ -21,4 +21,6 @@ appsettings.Local.json
 .env.local
 
 # EF Core
-src/**/Persistence/Migrations/*Designer.cs
+src/**/Persistence/Migrations/*Designer.cs.playwright-mcp/
+phase7-*.png
+phase7-*.jpeg

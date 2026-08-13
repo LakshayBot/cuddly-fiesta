@@ -1,3 +1,0 @@
-[      42ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=ffd07c61:14333
-[   18617ms] [INFO] [2026-08-13T15:52:02.206Z] Information: Normalizing '/hubs/simulation' to 'http://localhost:5173/hubs/simulation'. @ http://localhost:5173/node_modules/.vite/deps/@microsoft_signalr.js?v=ffd07c61:308
-[   18648ms] [INFO] [2026-08-13T15:52:02.237Z] Information: WebSocket connected to ws://localhost:5173/hubs/simulation?id=5yp8XAfyeL2MIfgNuuoyAQ. @ http://localhost:5173/node_modules/.vite/deps/@microsoft_signalr.js?v=ffd07c61:308
