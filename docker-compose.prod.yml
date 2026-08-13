@@ -1,7 +1,7 @@
 name: worldengine
 
 services:
-  postgres:
+  worldengine-db:
     image: postgres:16-alpine
     container_name: worldengine-postgres
     restart: unless-stopped
@@ -26,12 +26,12 @@ services:
     container_name: worldengine-api
     restart: unless-stopped
     depends_on:
-      postgres:
+      worldengine-db:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
-      ConnectionStrings__WorldEngine: Host=postgres;Port=5432;Database=${POSTGRES_DB:-worldengine};Username=${POSTGRES_USER:-worldengine};Password=${POSTGRES_PASSWORD:-worldengine}
+      ConnectionStrings__WorldEngine: Host=worldengine-db;Port=5432;Database=${POSTGRES_DB:-worldengine};Username=${POSTGRES_USER:-worldengine};Password=${POSTGRES_PASSWORD:-worldengine}
       Cors__Origins: ${CORS_ORIGINS:-https://worldengine.lakshaycodes.dev}
     expose:
       - "8080"
