@@ -1,0 +1,24 @@
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.idea/
+.vscode/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# OS
+.DS_Store
+
+# Local secrets
+appsettings.Local.json
+*.env
+.env
+.env.local
+
+# EF Core
+src/**/Persistence/Migrations/*Designer.cs

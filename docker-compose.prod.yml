@@ -1,0 +1,76 @@
+name: worldengine
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: worldengine-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-worldengine}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-worldengine}
+      POSTGRES_DB: ${POSTGRES_DB:-worldengine}
+    volumes:
+      - worldengine-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-worldengine} -d ${POSTGRES_DB:-worldengine}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - worldengine-net
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: worldengine-api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__WorldEngine: Host=postgres;Port=5432;Database=${POSTGRES_DB:-worldengine};Username=${POSTGRES_USER:-worldengine};Password=${POSTGRES_PASSWORD:-worldengine}
+      Cors__Origins: ${CORS_ORIGINS:-https://worldengine.lakshaycodes.dev}
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:8080/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - worldengine-net
+      - rag-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-https://worldengine-api.lakshaycodes.dev/api}
+        VITE_HUB_URL: ${VITE_HUB_URL:-https://worldengine-api.lakshaycodes.dev/hubs/simulation}
+    container_name: worldengine-frontend
+    restart: unless-stopped
+    expose:
+      - "80"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - rag-network
+
+networks:
+  worldengine-net:
+    driver: bridge
+  rag-network:
+    external: true
+
+volumes:
+  worldengine-postgres-data:
+    driver: local

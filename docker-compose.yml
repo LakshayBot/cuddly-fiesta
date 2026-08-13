@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: worldengine-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: worldengine
+      POSTGRES_PASSWORD: worldengine
+      POSTGRES_DB: worldengine
+    ports:
+      - "55432:5432"
+    volumes:
+      - worldengine-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U worldengine -d worldengine"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: worldengine-api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__WorldEngine: Host=postgres;Port=5432;Database=worldengine;Username=worldengine;Password=worldengine
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: node:20-alpine
+    container_name: worldengine-frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_TARGET: http://api:8080
+    command: sh -c "npm install && npm run dev -- --host"
+    depends_on:
+      - api
+
+volumes:
+  worldengine-postgres-data:
+    driver: local

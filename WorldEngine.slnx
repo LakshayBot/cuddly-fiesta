@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/WorldEngine.Api/WorldEngine.Api.csproj" />
+    <Project Path="src/WorldEngine.Domain/WorldEngine.Domain.csproj" />
+    <Project Path="src/WorldEngine.Infrastructure/WorldEngine.Infrastructure.csproj" />
+    <Project Path="src/WorldEngine.Tests/WorldEngine.Tests.csproj" />
+  </Folder>
+</Solution>
