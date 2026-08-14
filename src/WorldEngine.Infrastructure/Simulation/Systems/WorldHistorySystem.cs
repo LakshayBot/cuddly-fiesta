@@ -260,10 +260,29 @@ public sealed class WorldHistorySystem : ISimulationSystem
         EventImportance importance,
         Func<Dictionary<string, string>, string> summarize)
     {
+        var facts = ExtractFacts(evt.Data);
+
+        return new WorldHistoryEntry
+        {
+            Id = Guid.NewGuid(),
+            WorldId = evt.WorldId,
+            Tick = evt.Tick,
+            SimulationTime = evt.SimulationTime,
+            EntryType = entryType,
+            Importance = importance,
+            FactsJson = evt.Data,
+            Summary = summarize(facts),
+            RelatedEventId = evt.Id,
+            CreatedAt = DateTime.UtcNow,
+        };
+    }
+
+    public static Dictionary<string, string> ExtractFacts(string json)
+    {
         var facts = new Dictionary<string, string>();
         try
         {
-            using var doc = JsonDocument.Parse(evt.Data);
+            using var doc = JsonDocument.Parse(json);
             foreach (var prop in doc.RootElement.EnumerateObject())
             {
                 facts[prop.Name] = prop.Value.ValueKind switch
@@ -279,19 +298,6 @@ public sealed class WorldHistorySystem : ISimulationSystem
         catch (JsonException)
         {
         }
-
-        return new WorldHistoryEntry
-        {
-            Id = Guid.NewGuid(),
-            WorldId = evt.WorldId,
-            Tick = evt.Tick,
-            SimulationTime = evt.SimulationTime,
-            EntryType = entryType,
-            Importance = importance,
-            FactsJson = evt.Data,
-            Summary = summarize(facts),
-            RelatedEventId = evt.Id,
-            CreatedAt = DateTime.UtcNow,
-        };
+        return facts;
     }
 }

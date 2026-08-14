@@ -591,3 +591,24 @@ public class DeepSimulationTests
             now: DateTime.UtcNow);
     }
 }
+public class HistoryFactExtractionTests
+{
+    [Fact]
+    public void ExtractFacts_HandlesNumericAndStringValues()
+    {
+        var facts = WorldEngine.Infrastructure.Simulation.Systems.WorldHistorySystem.ExtractFacts(
+            "{\"name\":\"Mira\",\"age\":37,\"cause\":\"Starvation\",\"alive\":false}");
+
+        Assert.Equal("Mira", facts["name"]);
+        Assert.Equal("37", facts["age"]);
+        Assert.Equal("Starvation", facts["cause"]);
+        Assert.Equal("false", facts["alive"]);
+    }
+
+    [Fact]
+    public void ExtractFacts_InvalidJson_ReturnsEmpty()
+    {
+        var facts = WorldEngine.Infrastructure.Simulation.Systems.WorldHistorySystem.ExtractFacts("not json");
+        Assert.Empty(facts);
+    }
+}
