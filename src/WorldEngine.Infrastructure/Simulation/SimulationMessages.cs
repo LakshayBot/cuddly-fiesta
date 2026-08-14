@@ -11,6 +11,7 @@ public sealed record WorldStateUpdate(
     DateTime UpdatedAt);
 
 public sealed record SimulationEventDto(
+    Guid Id,
     Guid WorldId,
     long Tick,
     DateTime SimulationTime,

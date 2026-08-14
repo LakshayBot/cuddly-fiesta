@@ -1,0 +1,16 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - heading "World Engine" [level=1] [ref=e6]
+    - paragraph [ref=e7]: Persistent civilization simulation — pick or create a world
+  - generic [ref=e8]:
+    - heading "Create a new world" [level=2] [ref=e9]
+    - generic [ref=e10]:
+      - textbox "World name…" [ref=e11]
+      - generic [ref=e12]:
+        - text: Population
+        - spinbutton "Population" [ref=e13]: "50"
+      - button "Create" [disabled] [ref=e14]
+  - generic [ref=e15]:
+    - heading "Worlds" [level=2] [ref=e16]
+    - paragraph [ref=e17]: Loading…
+    - list [ref=e18]

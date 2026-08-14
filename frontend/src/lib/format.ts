@@ -77,7 +77,7 @@ export function toEventView(
   const targetName = fmtName(evt.targetAgentId, agents) ?? (data.targetName as string) ?? shortId(evt.targetAgentId);
 
   return {
-    id: 'id' in evt ? evt.id : `${evt.tick}-${evt.eventType}-${Math.random().toString(36).slice(2, 8)}`,
+    id: evt.id,
     tick: evt.tick,
     simulationTime: evt.simulationTime,
     eventType: evt.eventType,

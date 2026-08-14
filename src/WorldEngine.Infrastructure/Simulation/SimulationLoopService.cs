@@ -142,6 +142,7 @@ public sealed class SimulationLoopService : BackgroundService
                 }
 
                 var dto = new SimulationEventDto(
+                    evt.Id,
                     evt.WorldId,
                     evt.Tick,
                     evt.SimulationTime,

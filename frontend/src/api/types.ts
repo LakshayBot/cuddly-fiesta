@@ -171,6 +171,7 @@ export interface WorldStateUpdate {
 }
 
 export interface SignalEvent {
+  id: string;
   worldId: string;
   tick: number;
   simulationTime: string;

@@ -1,0 +1,305 @@
+- generic [ref=e54]:
+  - banner [ref=e55]:
+    - generic [ref=e56]:
+      - button "◀" [ref=e57]
+      - heading "Deep Sim" [level=1] [ref=e58]
+      - generic "Running" [ref=e59]: Running
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]: Age
+        - generic [ref=e64]: 2d
+      - generic [ref=e65]:
+        - generic [ref=e66]: Sim time
+        - generic [ref=e67]: 2026-08-16 12:46
+      - generic [ref=e68]:
+        - generic [ref=e69]: Tick
+        - generic [ref=e70]: "26"
+      - generic [ref=e71]:
+        - generic [ref=e72]: Population
+        - generic [ref=e73]: "30"
+    - generic [ref=e74]:
+      - button "Start" [disabled] [ref=e75]
+      - button "Pause" [ref=e76]
+      - button "👁 Follow random" [ref=e77]
+      - button "Debug" [ref=e78]
+    - generic [ref=e79]:
+      - button "1×" [ref=e80]
+      - button "5×" [ref=e81]
+      - button "10×" [ref=e82]
+      - button "50×" [ref=e83]
+      - button "100×" [ref=e84]
+      - button "200×" [ref=e85]
+  - generic [ref=e87]:
+    - img [ref=e88]:
+      - generic [ref=e89]:
+        - generic [ref=e92]: Farm
+        - generic [ref=e93]: 10 here
+      - generic [ref=e94]:
+        - generic [ref=e97]: Forest
+        - generic [ref=e98]: 8 here
+      - generic [ref=e99]:
+        - generic [ref=e102]: River
+        - generic [ref=e103]: 0 here
+      - generic [ref=e104]:
+        - generic [ref=e107]: Village
+        - generic [ref=e108]: 12 here
+    - generic [ref=e169]:
+      - generic [ref=e170]: Farmer
+      - generic [ref=e172]: Woodcutter
+      - generic [ref=e174]: Worker
+      - generic [ref=e176]: Unemployed
+  - generic [ref=e178]:
+    - generic [ref=e179]:
+      - generic [ref=e180]: Events
+      - generic [ref=e181]:
+        - button "All" [ref=e182]
+        - button "Social" [ref=e183]
+        - button "Economy" [ref=e184]
+        - button "Conflict" [ref=e185]
+        - button "Death" [ref=e186]
+        - button "Birth" [ref=e187]
+        - button "Settlement" [ref=e188]
+        - button "Movement" [ref=e189]
+      - button "History" [ref=e190]
+    - generic [ref=e192]:
+      - generic [ref=e193] [cursor=pointer]:
+        - generic [ref=e194]: 2026-08-16 14:26
+        - generic [ref=e196]: "#189b helped Bran Blackwell with food"
+        - button "inspect" [ref=e197]
+      - generic [ref=e198] [cursor=pointer]:
+        - generic [ref=e199]: 2026-08-16 14:26
+        - generic [ref=e201]: "#0518 talked with Ilona Ellsworth"
+        - button "inspect" [ref=e202]
+      - generic [ref=e203] [cursor=pointer]:
+        - generic [ref=e204]: 2026-08-16 14:26
+        - generic [ref=e206]: "#1750 talked with Quinn Inglewood"
+        - button "inspect" [ref=e207]
+      - generic [ref=e208] [cursor=pointer]:
+        - generic [ref=e209]: 2026-08-16 14:26
+        - generic [ref=e211]: "#8cf2 helped Maeve Gildersleeve with food"
+        - button "inspect" [ref=e212]
+      - generic [ref=e213] [cursor=pointer]:
+        - generic [ref=e214]: 2026-08-16 14:26
+        - generic [ref=e216]: "#b39b helped Cassia Jardine with food"
+        - button "inspect" [ref=e217]
+      - generic [ref=e218] [cursor=pointer]:
+        - generic [ref=e219]: 2026-08-16 14:26
+        - generic [ref=e221]: "#a226 worked, earning 2 money and 1 food"
+        - button "inspect" [ref=e222]
+      - generic [ref=e223] [cursor=pointer]:
+        - generic [ref=e224]: 2026-08-16 14:26
+        - generic [ref=e226]: "#5077 harvested 1 food at the farm"
+        - button "inspect" [ref=e227]
+      - generic [ref=e228] [cursor=pointer]:
+        - generic [ref=e229]: 2026-08-16 14:26
+        - generic [ref=e231]: "#d5c8 gathered 1 wood (foraged 0.50 food)"
+        - button "inspect" [ref=e232]
+      - generic [ref=e233] [cursor=pointer]:
+        - generic [ref=e234]: 2026-08-16 14:26
+        - generic [ref=e236]: "#b61f harvested 1 food at the farm"
+        - button "inspect" [ref=e237]
+      - generic [ref=e238] [cursor=pointer]:
+        - generic [ref=e239]: 2026-08-16 14:26
+        - generic [ref=e241]: "#6242 talked with Pia Redbourn"
+        - button "inspect" [ref=e242]
+      - generic [ref=e243] [cursor=pointer]:
+        - generic [ref=e244]: 2026-08-16 14:26
+        - generic [ref=e246]: "#5cd6 helped Yvette Greymane with food"
+        - button "inspect" [ref=e247]
+      - generic [ref=e248] [cursor=pointer]:
+        - generic [ref=e249]: 2026-08-16 14:26
+        - generic [ref=e251]: "#f2a4 helped Maeve Gildersleeve with food"
+        - button "inspect" [ref=e252]
+      - generic [ref=e253] [cursor=pointer]:
+        - generic [ref=e254]: 2026-08-16 14:26
+        - generic [ref=e256]: "#f507 gathered 1 wood (foraged 0.50 food)"
+        - button "inspect" [ref=e257]
+      - generic [ref=e258] [cursor=pointer]:
+        - generic [ref=e259]: 2026-08-16 14:26
+        - generic [ref=e261]: "#bf84 talked with Pia Redbourn"
+        - button "inspect" [ref=e262]
+      - generic [ref=e263] [cursor=pointer]:
+        - generic [ref=e264]: 2026-08-16 14:26
+        - generic [ref=e266]: "#6f24 rested (energy 0.75)"
+        - button "inspect" [ref=e267]
+      - generic [ref=e268] [cursor=pointer]:
+        - generic [ref=e269]: 2026-08-16 14:26
+        - generic [ref=e271]: "#f47b helped Una Ulverston with food"
+        - button "inspect" [ref=e272]
+      - generic [ref=e273] [cursor=pointer]:
+        - generic [ref=e274]: 2026-08-16 14:26
+        - generic [ref=e276]: "#c9a8 helped Una Ulverston with food"
+        - button "inspect" [ref=e277]
+      - generic [ref=e278] [cursor=pointer]:
+        - generic [ref=e279]: 2026-08-16 14:26
+        - generic [ref=e281]: "#2623 gathered 1 wood (foraged 0.50 food)"
+        - button "inspect" [ref=e282]
+      - generic [ref=e283] [cursor=pointer]:
+        - generic [ref=e284]: 2026-08-16 14:26
+        - generic [ref=e286]: "#b38f helped Cassia Jardine with food"
+        - button "inspect" [ref=e287]
+      - generic [ref=e288] [cursor=pointer]:
+        - generic [ref=e289]: 2026-08-16 14:26
+        - generic [ref=e291]: "#8fda helped Quill Whitlow with food"
+        - button "inspect" [ref=e292]
+      - generic [ref=e293] [cursor=pointer]:
+        - generic [ref=e294]: 2026-08-16 14:26
+        - generic [ref=e296]: "#c36a helped Una Ulverston with food"
+        - button "inspect" [ref=e297]
+      - generic [ref=e298] [cursor=pointer]:
+        - generic [ref=e299]: 2026-08-16 14:26
+        - generic [ref=e301]: "#7be2 helped Maeve Gildersleeve with food"
+        - button "inspect" [ref=e302]
+      - generic [ref=e303] [cursor=pointer]:
+        - generic [ref=e304]: 2026-08-16 14:26
+        - generic [ref=e306]: "#bdb1 talked with Pia Redbourn"
+        - button "inspect" [ref=e307]
+      - generic [ref=e308] [cursor=pointer]:
+        - generic [ref=e309]: 2026-08-16 14:26
+        - generic [ref=e311]: "#ae6f talked with Linnea Norwich"
+        - button "inspect" [ref=e312]
+      - generic [ref=e313] [cursor=pointer]:
+        - generic [ref=e314]: 2026-08-16 14:26
+        - generic [ref=e316]: "#ec9b helped Maeve Gildersleeve with food"
+        - button "inspect" [ref=e317]
+      - generic [ref=e318] [cursor=pointer]:
+        - generic [ref=e319]: 2026-08-16 14:26
+        - generic [ref=e321]: "#d8bb gathered 1 wood (foraged 0.50 food)"
+        - button "inspect" [ref=e322]
+      - generic [ref=e323] [cursor=pointer]:
+        - generic [ref=e324]: 2026-08-16 14:26
+        - generic [ref=e326]: "#b80e helped Maeve Gildersleeve with food"
+        - button "inspect" [ref=e327]
+      - generic [ref=e328] [cursor=pointer]:
+        - generic [ref=e329]: 2026-08-16 14:26
+        - generic [ref=e331]: "#7fbc rested (energy 0.50)"
+        - button "inspect" [ref=e332]
+      - generic [ref=e333] [cursor=pointer]:
+        - generic [ref=e334]: 2026-08-16 14:26
+        - generic [ref=e336]: "#b205 rested (energy 0.80)"
+        - button "inspect" [ref=e337]
+      - generic [ref=e338] [cursor=pointer]:
+        - generic [ref=e339]: 2026-08-16 14:26
+        - generic [ref=e341]: "#35b8 helped Joren Kingsford with food"
+        - button "inspect" [ref=e342]
+      - generic [ref=e343] [cursor=pointer]:
+        - generic [ref=e344]: 2026-08-16 12:46
+        - generic [ref=e346]: "#f2a4 harvested 1 food at the farm"
+        - button "inspect" [ref=e347]
+      - generic [ref=e348] [cursor=pointer]:
+        - generic [ref=e349]: 2026-08-16 12:46
+        - generic [ref=e351]: "#7be2 harvested 1 food at the farm"
+        - button "inspect" [ref=e352]
+      - generic [ref=e353] [cursor=pointer]:
+        - generic [ref=e354]: 2026-08-16 12:46
+        - generic [ref=e356]: "#b61f helped Maeve Gildersleeve with food"
+        - button "inspect" [ref=e357]
+      - generic [ref=e358] [cursor=pointer]:
+        - generic [ref=e359]: 2026-08-16 12:46
+        - generic [ref=e361]: "#6242 talked with Pia Redbourn"
+        - button "inspect" [ref=e362]
+      - generic [ref=e363] [cursor=pointer]:
+        - generic [ref=e364]: 2026-08-16 12:46
+        - generic [ref=e366]: "#c36a helped Una Ulverston with food"
+        - button "inspect" [ref=e367]
+      - generic [ref=e368] [cursor=pointer]:
+        - generic [ref=e369]: 2026-08-16 12:46
+        - generic [ref=e371]: "#189b helped Bran Blackwell with food"
+        - button "inspect" [ref=e372]
+      - generic [ref=e373] [cursor=pointer]:
+        - generic [ref=e374]: 2026-08-16 12:46
+        - generic [ref=e376]: "#6f24 helped Cassia Jardine with food"
+        - button "inspect" [ref=e377]
+      - generic [ref=e378] [cursor=pointer]:
+        - generic [ref=e379]: 2026-08-16 12:46
+        - generic [ref=e381]: "#5cd6 helped Yvette Greymane with food"
+        - button "inspect" [ref=e382]
+      - generic [ref=e383] [cursor=pointer]:
+        - generic [ref=e384]: 2026-08-16 12:46
+        - generic [ref=e386]: "#f47b gathered 1 wood (foraged 0.50 food)"
+        - button "inspect" [ref=e387]
+      - generic [ref=e388] [cursor=pointer]:
+        - generic [ref=e389]: 2026-08-16 12:46
+        - generic [ref=e391]: "#d8bb gathered 1 wood (foraged 0.50 food)"
+        - button "inspect" [ref=e392]
+      - generic [ref=e393] [cursor=pointer]:
+        - generic [ref=e394]: 2026-08-16 12:46
+        - generic [ref=e396]: "#b80e harvested 1 food at the farm"
+        - button "inspect" [ref=e397]
+      - generic [ref=e398] [cursor=pointer]:
+        - generic [ref=e399]: 2026-08-16 12:46
+        - generic [ref=e401]: "#bf84 talked with Pia Redbourn"
+        - button "inspect" [ref=e402]
+      - generic [ref=e403] [cursor=pointer]:
+        - generic [ref=e404]: 2026-08-16 12:46
+        - generic [ref=e406]: "#f507 gathered 1 wood (foraged 0.50 food)"
+        - button "inspect" [ref=e407]
+      - generic [ref=e408] [cursor=pointer]:
+        - generic [ref=e409]: 2026-08-16 12:46
+        - generic [ref=e411]: "#7fbc helped Sable Verdley with food"
+        - button "inspect" [ref=e412]
+      - generic [ref=e413] [cursor=pointer]:
+        - generic [ref=e414]: 2026-08-16 12:46
+        - generic [ref=e416]: "#5077 helped Maeve Gildersleeve with food"
+        - button "inspect" [ref=e417]
+      - generic [ref=e418] [cursor=pointer]:
+        - generic [ref=e419]: 2026-08-16 12:46
+        - generic [ref=e421]: "#0518 talked with Ilona Ellsworth"
+        - button "inspect" [ref=e422]
+      - generic [ref=e423] [cursor=pointer]:
+        - generic [ref=e424]: 2026-08-16 12:46
+        - generic [ref=e426]: "#2623 helped Una Ulverston with food"
+        - button "inspect" [ref=e427]
+      - generic [ref=e428] [cursor=pointer]:
+        - generic [ref=e429]: 2026-08-16 12:46
+        - generic [ref=e431]: "#c9a8 gathered 1 wood (foraged 0.50 food)"
+        - button "inspect" [ref=e432]
+      - generic [ref=e433] [cursor=pointer]:
+        - generic [ref=e434]: 2026-08-16 12:46
+        - generic [ref=e436]: "#bdb1 talked with Pia Redbourn"
+        - button "inspect" [ref=e437]
+      - generic [ref=e438] [cursor=pointer]:
+        - generic [ref=e439]: 2026-08-16 12:46
+        - generic [ref=e441]: "#d5c8 gathered 1 wood (foraged 0.50 food)"
+        - button "inspect" [ref=e442]
+      - generic [ref=e443] [cursor=pointer]:
+        - generic [ref=e444]: 2026-08-16 12:46
+        - generic [ref=e446]: "#a226 helped Cassia Jardine with food"
+        - button "inspect" [ref=e447]
+      - generic [ref=e448] [cursor=pointer]:
+        - generic [ref=e449]: 2026-08-16 12:46
+        - generic [ref=e451]: "#ec9b helped Maeve Gildersleeve with food"
+        - button "inspect" [ref=e452]
+      - generic [ref=e453] [cursor=pointer]:
+        - generic [ref=e454]: 2026-08-16 12:46
+        - generic [ref=e456]: "#b38f worked, earning 2 money and 1 food"
+        - button "inspect" [ref=e457]
+      - generic [ref=e458] [cursor=pointer]:
+        - generic [ref=e459]: 2026-08-16 12:46
+        - generic [ref=e461]: "#b205 talked with Pia Redbourn"
+        - button "inspect" [ref=e462]
+      - generic [ref=e463] [cursor=pointer]:
+        - generic [ref=e464]: 2026-08-16 12:46
+        - generic [ref=e466]: "#b39b helped Cassia Jardine with food"
+        - button "inspect" [ref=e467]
+      - generic [ref=e468] [cursor=pointer]:
+        - generic [ref=e469]: 2026-08-16 12:46
+        - generic [ref=e471]: "#35b8 helped Joren Kingsford with food"
+        - button "inspect" [ref=e472]
+      - generic [ref=e473] [cursor=pointer]:
+        - generic [ref=e474]: 2026-08-16 12:46
+        - generic [ref=e476]: "#ae6f talked with Linnea Norwich"
+        - button "inspect" [ref=e477]
+      - generic [ref=e478] [cursor=pointer]:
+        - generic [ref=e479]: 2026-08-16 12:46
+        - generic [ref=e481]: "#8fda helped Quill Whitlow with food"
+        - button "inspect" [ref=e482]
+      - generic [ref=e483] [cursor=pointer]:
+        - generic [ref=e484]: 2026-08-16 12:46
+        - generic [ref=e486]: "#1750 talked with Quinn Inglewood"
+        - button "inspect" [ref=e487]
+      - generic [ref=e488] [cursor=pointer]:
+        - generic [ref=e489]: 2026-08-16 12:46
+        - generic [ref=e491]: "#8cf2 rested (energy 0.55)"
+        - button "inspect" [ref=e492]
+  - button "📜 World History" [ref=e493]
