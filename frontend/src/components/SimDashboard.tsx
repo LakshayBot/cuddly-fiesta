@@ -6,13 +6,17 @@ import { useSimulationRealtime } from '../realtime/useSimulationRealtime';
 import { TopBar } from './TopBar';
 import { WorldCanvas } from './WorldCanvas';
 import { AgentInspector } from './AgentInspector';
+import { EventInspector } from './EventInspector';
 import { EventTimeline } from './EventTimeline';
+import { ObserverOverlay } from './ObserverOverlay';
+import { WorldHistoryModal } from './WorldHistoryModal';
 
 export function SimDashboard({ worldId, onExit }: { worldId: string; onExit: () => void }) {
   const queryClient = useQueryClient();
   const setWorld = useSimStore((s) => s.setWorld);
   const setAgents = useSimStore((s) => s.setAgents);
   const selectedAgentId = useSimStore((s) => s.selectedAgentId);
+  const selectedEventId = useSimStore((s) => s.selectedEventId);
   const selectAgent = useSimStore((s) => s.selectAgent);
   const reset = useSimStore((s) => s.reset);
 
@@ -71,8 +75,11 @@ export function SimDashboard({ worldId, onExit }: { worldId: string; onExit: () 
           onSelectAgent={selectAgent}
         />
         {selectedAgentId && <AgentInspector agentId={selectedAgentId} />}
+        {selectedEventId && <EventInspector eventId={selectedEventId} />}
       </div>
       <EventTimeline worldId={worldId} />
+      <ObserverOverlay />
+      <WorldHistoryModal worldId={worldId} />
     </div>
   );
 }

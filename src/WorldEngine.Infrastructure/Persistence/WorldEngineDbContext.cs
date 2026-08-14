@@ -33,6 +33,12 @@ public class WorldEngineDbContext : DbContext
 
     public DbSet<GroupMembership> GroupMemberships => Set<GroupMembership>();
 
+    public DbSet<EventCause> EventCauses => Set<EventCause>();
+
+    public DbSet<EventConsequence> EventConsequences => Set<EventConsequence>();
+
+    public DbSet<WorldHistoryEntry> WorldHistoryEntries => Set<WorldHistoryEntry>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<World>(entity =>
@@ -330,6 +336,83 @@ public class WorldEngineDbContext : DbContext
                 .WithMany()
                 .HasForeignKey(gm => gm.GroupId)
                 .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<SimulationEvent>(entity =>
+        {
+            entity.Property(e => e.Importance)
+                .HasConversion<int>();
+
+            entity.HasIndex(e => new { e.WorldId, e.SimulationTime });
+            entity.HasIndex(e => new { e.WorldId, e.EventType });
+            entity.HasIndex(e => new { e.WorldId, e.Importance });
+        });
+
+        modelBuilder.Entity<EventCause>(entity =>
+        {
+            entity.ToTable("event_causes");
+            entity.HasKey(c => c.Id);
+
+            entity.Property(c => c.CauseType)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            entity.Property(c => c.Name)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            entity.Property(c => c.Description)
+                .HasMaxLength(1000);
+
+            entity.HasIndex(c => c.EventId);
+            entity.HasIndex(c => c.CauseEventId);
+            entity.HasIndex(c => c.DecisionRecordId);
+        });
+
+        modelBuilder.Entity<EventConsequence>(entity =>
+        {
+            entity.ToTable("event_consequences");
+            entity.HasKey(c => c.Id);
+
+            entity.Property(c => c.Kind)
+                .IsRequired()
+                .HasMaxLength(20);
+
+            entity.Property(c => c.ConsequenceType)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            entity.Property(c => c.Description)
+                .HasMaxLength(1000);
+
+            entity.HasIndex(c => c.EventId);
+            entity.HasIndex(c => c.ConsequenceEventId);
+        });
+
+        modelBuilder.Entity<WorldHistoryEntry>(entity =>
+        {
+            entity.ToTable("world_history_entries");
+            entity.HasKey(h => h.Id);
+
+            entity.Property(h => h.EntryType)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            entity.Property(h => h.FactsJson)
+                .HasColumnType("jsonb");
+
+            entity.Property(h => h.Summary)
+                .IsRequired()
+                .HasMaxLength(1000);
+
+            entity.Property(h => h.SimulationTime)
+                .HasColumnType("timestamp with time zone");
+
+            entity.Property(h => h.CreatedAt)
+                .HasColumnType("timestamp with time zone");
+
+            entity.HasIndex(h => new { h.WorldId, h.SimulationTime });
+            entity.HasIndex(h => new { h.WorldId, h.Importance });
         });
     }
 }

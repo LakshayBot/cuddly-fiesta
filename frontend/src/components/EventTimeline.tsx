@@ -27,6 +27,7 @@ export const EventTimeline = memo(function EventTimeline({ worldId }: { worldId:
   const setEventFilter = useSimStore((s) => s.setEventFilter);
   const agentMap = useSimStore((s) => s.agentMap);
   const selectAgent = useSimStore((s) => s.selectAgent);
+  const selectEvent = useSimStore((s) => s.selectEvent);
 
   const [showHistory, setShowHistory] = useState(false);
   const [historyBefore, setHistoryBefore] = useState<number | undefined>(undefined);
@@ -110,21 +111,26 @@ export const EventTimeline = memo(function EventTimeline({ worldId }: { worldId:
         ) : (
           <div className="space-y-0.5">
             {filtered.slice(0, 60).map((e) => (
-              <div key={e.id} className="flex items-baseline gap-2 text-[11px]">
+              <div
+                key={e.id}
+                className="flex cursor-pointer items-baseline gap-2 text-[11px] rounded px-1 hover:bg-zinc-900"
+                onClick={() => selectEvent(e.id)}
+              >
                 <span className="shrink-0 font-mono text-[9px] text-zinc-600">
                   {formatSimDate(e.simulationTime)}
                 </span>
                 <Dot category={e.category} />
-                {e.actorAgentId ? (
+                <span className="truncate text-zinc-300">{e.text}</span>
+                {e.actorAgentId && (
                   <button
-                    onClick={() => e.actorAgentId && selectAgent(e.actorAgentId)}
-                    className="truncate text-left text-zinc-300 hover:text-emerald-300"
-                    title="Inspect agent"
+                    onClick={(ev) => {
+                      ev.stopPropagation();
+                      if (e.actorAgentId) selectAgent(e.actorAgentId);
+                    }}
+                    className="shrink-0 text-[9px] text-emerald-500/70 hover:text-emerald-300"
                   >
-                    {e.text}
+                    inspect
                   </button>
-                ) : (
-                  <span className="truncate text-zinc-300">{e.text}</span>
                 )}
               </div>
             ))}

@@ -39,6 +39,8 @@ internal static class TestSetup
         SettlementEmergenceSystem SettlementSystem,
         GroupEmergenceSystem GroupSystem,
         ConflictDetectionSystem ConflictSystem,
+        CausalitySystem CausalitySystem,
+        WorldHistorySystem HistorySystem,
         SimulationOptions Options);
 
     public static Harness CreateHarness(
@@ -87,6 +89,14 @@ internal static class TestSetup
             factory,
             simOptions,
             NullLogger<ConflictDetectionSystem>.Instance);
+        var causalitySystem = new CausalitySystem(
+            factory,
+            simOptions,
+            NullLogger<CausalitySystem>.Instance);
+        var historySystem = new WorldHistorySystem(
+            factory,
+            simOptions,
+            NullLogger<WorldHistorySystem>.Instance);
 
         var systems = new List<ISimulationSystem> { agentSystem };
         if (withSocialSystem)
@@ -103,7 +113,7 @@ internal static class TestSetup
 
         return new Harness(
             factory, registry, engine, agentSystem, socialSystem,
-            settlementSystem, groupSystem, conflictSystem, simOptions);
+            settlementSystem, groupSystem, conflictSystem, causalitySystem, historySystem, simOptions);
     }
 
     public static Harness CreateHarnessWithoutSystems(
@@ -136,7 +146,7 @@ internal static class TestSetup
             simOptions,
             NullLogger<SimulationEngine>.Instance);
 
-        return new Harness(factory, registry, engine, null!, null!, null!, null!, null!, simOptions);
+        return new Harness(factory, registry, engine, null!, null!, null!, null!, null!, null!, null!, simOptions);
     }
 
     public static async Task<World> SeedWorldAsync(

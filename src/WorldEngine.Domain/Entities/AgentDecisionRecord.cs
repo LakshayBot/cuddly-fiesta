@@ -22,6 +22,8 @@ public class AgentDecisionRecord
 
     public string AvailableActionsJson { get; set; } = "[]";
 
+    public string? SelectedFactorsJson { get; set; }
+
     public string? Reasoning { get; set; }
 
     public DateTime DecidedAt { get; set; }

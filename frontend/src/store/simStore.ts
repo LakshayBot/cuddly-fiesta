@@ -13,6 +13,9 @@ interface SimState {
   followAgent: (id: string | null) => void;
   setAgents: (agents: Agent[]) => void;
 
+  selectedEventId: string | null;
+  selectEvent: (id: string | null) => void;
+
   liveEvents: EventView[];
   eventsSinceTick: number;
   pushEvents: (events: EventView[]) => void;
@@ -20,6 +23,9 @@ interface SimState {
 
   eventFilter: string;
   setEventFilter: (filter: string) => void;
+
+  debugMode: boolean;
+  setDebugMode: (on: boolean) => void;
 
   reset: () => void;
 }
@@ -33,10 +39,13 @@ export const useSimStore = create<SimState>((set) => ({
   selectedAgentId: null,
   followedAgentId: null,
   agentMap: new Map(),
-  selectAgent: (id) => set({ selectedAgentId: id }),
+  selectAgent: (id) => set({ selectedAgentId: id, selectedEventId: null }),
   followAgent: (id) => set({ followedAgentId: id, selectedAgentId: id }),
   setAgents: (agents) =>
     set({ agentMap: new Map(agents.map((a) => [a.id, a])) }),
+
+  selectedEventId: null,
+  selectEvent: (id) => set({ selectedEventId: id, selectedAgentId: null }),
 
   liveEvents: [],
   eventsSinceTick: 0,
@@ -58,14 +67,19 @@ export const useSimStore = create<SimState>((set) => ({
   eventFilter: 'all',
   setEventFilter: (filter) => set({ eventFilter: filter }),
 
+  debugMode: false,
+  setDebugMode: (on) => set({ debugMode: on }),
+
   reset: () =>
     set({
       world: null,
       selectedAgentId: null,
       followedAgentId: null,
       agentMap: new Map(),
+      selectedEventId: null,
       liveEvents: [],
       eventsSinceTick: 0,
       eventFilter: 'all',
+      debugMode: false,
     }),
 }));

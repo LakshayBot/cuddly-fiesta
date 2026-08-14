@@ -18,4 +18,5 @@ public sealed record SimulationEventDto(
     Guid? ActorAgentId,
     Guid? TargetAgentId,
     Guid? LocationId,
+    EventImportance Importance,
     IReadOnlyDictionary<string, object?> Data);

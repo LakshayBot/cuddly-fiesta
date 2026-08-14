@@ -125,6 +125,8 @@ export interface SimulationEvent {
   targetAgentId: string | null;
   locationId: string | null;
   data: string;
+  importance: number;
+  importanceScore: number;
   createdAt: string;
 }
 
@@ -176,7 +178,109 @@ export interface SignalEvent {
   actorAgentId: string | null;
   targetAgentId: string | null;
   locationId: string | null;
+  importance: number;
   data: Record<string, unknown>;
+}
+
+export const IMPORTANCE_NAMES: Record<number, string> = {
+  0: 'Trivial',
+  1: 'Normal',
+  2: 'Significant',
+  3: 'Major',
+  4: 'Historical',
+};
+
+export const IMPORTANCE_COLORS: Record<number, string> = {
+  0: '#3f4a58',
+  1: '#64748b',
+  2: '#f59e0b',
+  3: '#f97316',
+  4: '#ef4444',
+};
+
+export interface EventCause {
+  id: string;
+  causeType: string;
+  causeEventId: string | null;
+  decisionRecordId: string | null;
+  name: string;
+  value: number | null;
+  description: string;
+  createdTick: number;
+}
+
+export interface EventConsequence {
+  id: string;
+  kind: string;
+  consequenceType: string;
+  consequenceEventId: string | null;
+  consequenceMemoryId: string | null;
+  description: string;
+  createdTick: number;
+}
+
+export interface EventDetail {
+  id: string;
+  tick: number;
+  simulationTime: string;
+  eventType: string;
+  actorAgentId: string | null;
+  actorName: string | null;
+  targetAgentId: string | null;
+  targetName: string | null;
+  locationId: string | null;
+  data: string;
+  importance: number;
+  importanceScore: number;
+  causes: EventCause[];
+  directConsequences: EventConsequence[];
+  indirectConsequences: EventConsequence[];
+}
+
+export interface LifeMilestone {
+  tick: number;
+  simulationTime: string;
+  type: string;
+  importance: number;
+  summary: string;
+  eventId: string | null;
+}
+
+export interface AgentLife {
+  agentId: string;
+  name: string;
+  alive: boolean;
+  ageYears: number;
+  occupation: string;
+  location: string;
+  currentAction: string | null;
+  currentReasoning: string | null;
+  milestones: LifeMilestone[];
+}
+
+export interface WorldHistoryEntry {
+  id: string;
+  tick: number;
+  simulationTime: string;
+  entryType: string;
+  importance: number;
+  factsJson: string;
+  summary: string;
+  relatedEventId: string | null;
+}
+
+export interface AutopsyFactor {
+  tick: number;
+  simulationTime: string;
+  eventType: string;
+  eventId: string | null;
+  description: string;
+}
+
+export interface Autopsy {
+  subject: string;
+  summary: string;
+  timeline: AutopsyFactor[];
 }
 
 export const STATUS_NAMES: Record<number, SimulationStatus> = {

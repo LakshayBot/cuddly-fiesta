@@ -67,4 +67,22 @@ public sealed class SimulationOptions
     public int ConflictCooldownTicks { get; set; } = 50;
 
     public decimal TradeFoodPrice { get; set; } = 0.5m;
+
+    public int CauseLookbackTicks { get; set; } = 100;
+
+    public int ImportanceEscalationIntervalTicks { get; set; } = 120;
+
+    public int HistoryWindowTicks { get; set; } = 200;
+
+    public int HistoryEntryCooldownTicks { get; set; } = 150;
+
+    public int DeathWaveThreshold { get; set; } = 5;
+
+    public double PopulationDeclineThreshold { get; set; } = 0.2;
+
+    public int MajorConflictThreshold { get; set; } = 3;
+
+    public double FoodCrisisThreshold { get; set; } = 5.0;
+
+    public int FoodCrisisWindowTicks { get; set; } = 100;
 }

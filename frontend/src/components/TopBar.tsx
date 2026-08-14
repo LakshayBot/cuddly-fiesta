@@ -16,11 +16,22 @@ export const TopBar = memo(function TopBar({
 }) {
   const world = useSimStore((s) => s.world);
   const queryClient = useQueryClient();
+  const debugMode = useSimStore((s) => s.debugMode);
+  const setDebugMode = useSimStore((s) => s.setDebugMode);
+  const followAgent = useSimStore((s) => s.followAgent);
 
   const mutate = useMutation({
     mutationFn: (fn: () => Promise<unknown>) => fn(),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['world'] }),
   });
+
+  const followRandom = () => {
+    const map = useSimStore.getState().agentMap;
+    const alive = [...map.values()].filter((a) => a.alive);
+    if (alive.length === 0) return;
+    const pick = alive[Math.floor(Math.random() * alive.length)];
+    followAgent(pick.id);
+  };
 
   if (!world) return null;
 
@@ -73,6 +84,24 @@ export const TopBar = memo(function TopBar({
           className="px-3 py-1.5 text-xs font-medium rounded-md bg-amber-600 text-amber-50 hover:bg-amber-500 disabled:opacity-40"
         >
           Pause
+        </button>
+        <button
+          onClick={followRandom}
+          className="px-3 py-1.5 text-xs font-medium rounded-md border border-pink-500/50 text-pink-300 hover:bg-pink-500/10"
+          title="Follow a random living agent"
+        >
+          👁 Follow random
+        </button>
+        <button
+          onClick={() => setDebugMode(!debugMode)}
+          className={`px-3 py-1.5 text-xs font-medium rounded-md border transition-colors ${
+            debugMode
+              ? 'border-fuchsia-500 bg-fuchsia-500/15 text-fuchsia-300'
+              : 'border-zinc-700 text-zinc-400 hover:text-zinc-200'
+          }`}
+          title="Toggle developer debug values"
+        >
+          Debug
         </button>
       </div>
 

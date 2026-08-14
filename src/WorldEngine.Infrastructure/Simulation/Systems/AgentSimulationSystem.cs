@@ -180,6 +180,7 @@ public sealed class AgentSimulationSystem : ISimulationSystem
             if (ShouldDie(agent, context, context.Random))
             {
                 Kill(agent, context, newEvents);
+                ApplyDeathConsequences(agent, rels, agents, context);
             }
 
             agent.UpdatedAt = now;
@@ -227,6 +228,19 @@ public sealed class AgentSimulationSystem : ISimulationSystem
             .Select(a => new { id = a.ActionId, type = a.ActionType, score = Math.Round(a.Score, 3), reasoning = a.Reasoning })
             .ToArray();
 
+        var selectedFactors = decision.SelectedAction?.Factors;
+        var factorsJson = selectedFactors is { Count: > 0 }
+            ? JsonSerializer.Serialize(selectedFactors.Select(f => new
+            {
+                type = f.Type.ToString(),
+                name = f.Name,
+                target = f.TargetName,
+                value = Math.Round(f.Value, 3),
+                contribution = Math.Round(f.Contribution, 3),
+                description = f.Description,
+            }))
+            : null;
+
         return new AgentDecisionRecord
         {
             Id = Guid.NewGuid(),
@@ -239,6 +253,7 @@ public sealed class AgentSimulationSystem : ISimulationSystem
             SelectedActionType = decision.SelectedAction?.ActionType ?? ActionTypes.Idle,
             SelectedScore = decision.SelectedAction?.Score ?? 0,
             AvailableActionsJson = JsonSerializer.Serialize(actions),
+            SelectedFactorsJson = factorsJson,
             Reasoning = decision.Reasoning,
             DecidedAt = now,
             ModelName = decision.ModelName,
@@ -355,6 +370,31 @@ public sealed class AgentSimulationSystem : ISimulationSystem
             }),
             CreatedAt = DateTime.UtcNow,
         });
+    }
+
+    private static void ApplyDeathConsequences(
+        Agent agent,
+        IReadOnlyList<AgentRelationship>? relationships,
+        IReadOnlyList<Agent> allAgents,
+        SimulationContext context)
+    {
+        var strongestPartner = relationships?
+            .Where(r => r.Affection >= 0.7)
+            .OrderByDescending(r => r.Affection)
+            .FirstOrDefault();
+
+        if (strongestPartner is null)
+        {
+            return;
+        }
+
+        var partner = allAgents.FirstOrDefault(a => a.Id == strongestPartner.TargetAgentId && a.Alive);
+        if (partner is null)
+        {
+            return;
+        }
+
+        partner.Happiness = Clamp01(partner.Happiness - 0.12);
     }
 
     private static double Clamp01(double value) => Math.Clamp(value, 0.0, 1.0);

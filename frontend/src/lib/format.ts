@@ -55,6 +55,7 @@ export interface EventView {
   actorAgentId: string | null;
   targetAgentId: string | null;
   data: Record<string, unknown>;
+  importance: number;
   text: string;
 }
 
@@ -84,6 +85,7 @@ export function toEventView(
     actorAgentId: evt.actorAgentId,
     targetAgentId: evt.targetAgentId,
     data,
+    importance: 'importance' in evt ? (evt.importance as number) : 1,
     text: describeEvent(evt.eventType, actorName, targetName, data),
   };
 }
@@ -176,4 +178,48 @@ export function worldAgeDays(worldCreatedAt: string, currentSimTime: string): st
   const days = (now - start) / 86_400_000;
   if (days < 1) return `${Math.round(days * 24)}h`;
   return `${Math.round(days)}d`;
+}
+
+export function interpretTrait(trait: keyof import('../api/types').AgentPersonality, value: number): string {
+  const low = value < 0.33;
+  const high = value > 0.66;
+  const mid = !low && !high;
+  switch (trait) {
+    case 'curiosity': return high ? 'Highly curious' : low ? 'Uninterested in novelty' : 'Moderately curious';
+    case 'aggression': return high ? 'Quick to anger' : low ? 'Avoids conflict' : 'Even-tempered';
+    case 'empathy': return high ? 'Deeply empathetic' : low ? 'Self-focused' : 'Considerate';
+    case 'sociability': return high ? 'Very social' : low ? 'Prefers solitude' : 'Sociable';
+    case 'ambition': return high ? 'Ambitious' : low ? 'Content with little' : 'Moderately driven';
+    case 'riskTolerance': return high ? 'Risk-taker' : low ? 'Cautious' : 'Balanced';
+    case 'discipline': return high ? 'Highly disciplined' : low ? 'Unpredictable' : 'Disciplined';
+    case 'generosity': return high ? 'Giving' : low ? 'Hoarding' : 'Fair-minded';
+    default: return String(mid);
+  }
+}
+
+export function interpretNeed(need: string, value: number): string {
+  switch (need) {
+    case 'hunger': return value >= 0.85 ? 'Starving' : value >= 0.5 ? 'Hungry' : value <= 0.15 ? 'Full' : 'Peckish';
+    case 'energy': return value <= 0.1 ? 'Exhausted' : value <= 0.4 ? 'Tired' : value >= 0.9 ? 'Rested' : 'Adequate';
+    case 'health': return value <= 0.2 ? 'Critically ill' : value <= 0.6 ? 'Unwell' : 'Healthy';
+    case 'happiness': return value <= 0.2 ? 'Miserable' : value <= 0.5 ? 'Unhappy' : value >= 0.8 ? 'Joyful' : 'Content';
+    case 'safety': return value <= 0.3 ? 'In danger' : 'Safe';
+    case 'socialNeed': return value >= 0.8 ? 'Lonely' : value >= 0.5 ? 'Seeking company' : 'Socially fulfilled';
+    default: return String(value.toFixed(2));
+  }
+}
+
+export function interpretRelationship(rel: {
+  trust: number;
+  affection: number;
+  anger: number;
+  targetName: string | null;
+}): string {
+  const name = rel.targetName ?? 'them';
+  if (rel.anger > 0.7) return `Hostile toward ${name}`;
+  if (rel.affection >= 0.8 && rel.trust >= 0.8) return `Strong friendship with ${name}`;
+  if (rel.affection >= 0.6) return `Close with ${name}`;
+  if (rel.trust >= 0.7) return `Trusts ${name}`;
+  if (rel.affection >= 0.5) return `Warm toward ${name}`;
+  return `Distant from ${name}`;
 }

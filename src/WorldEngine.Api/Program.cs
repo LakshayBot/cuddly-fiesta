@@ -86,6 +86,8 @@ builder.Services.AddSingleton<ISimulationSystem, SocialConsequenceSystem>();
 builder.Services.AddSingleton<ISimulationSystem, SettlementEmergenceSystem>();
 builder.Services.AddSingleton<ISimulationSystem, GroupEmergenceSystem>();
 builder.Services.AddSingleton<ISimulationSystem, ConflictDetectionSystem>();
+builder.Services.AddSingleton<ISimulationSystem, WorldHistorySystem>();
+builder.Services.AddSingleton<ISimulationSystem, CausalitySystem>();
 builder.Services.AddSingleton<SimulationEngine>();
 builder.Services.AddSingleton<ISimulationBroadcaster, SignalRSimulationBroadcaster>();
 

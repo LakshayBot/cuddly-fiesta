@@ -20,14 +20,14 @@ public sealed class RuleBasedDecisionEngine : IAgentDecisionEngine
         var scored = proposals
             .Select(p =>
             {
-                var baseScore = DecisionScoring.BaseScore(p, context);
-                var personality = DecisionScoring.PersonalityModifier(p, context);
+                var outcome = DecisionScoring.Score(p, context);
                 return new ScoredAction(
                     ActionId: p.ActionId,
                     ActionType: p.ActionType,
                     Action: p.Action,
-                    Score: baseScore + personality,
-                    Reasoning: $"base={baseScore:0.##}, personality={personality:0.##}");
+                    Score: outcome.Score,
+                    Reasoning: string.Join("; ", outcome.Factors.Select(f => f.Describe())),
+                    Factors: outcome.Factors);
             })
             .OrderByDescending(s => s.Score)
             .ToList();
@@ -41,7 +41,7 @@ public sealed class RuleBasedDecisionEngine : IAgentDecisionEngine
         if (valid.Count > 0)
         {
             selected = valid[0];
-            reasoning = $"Highest valid score. {selected.Reasoning}";
+            reasoning = $"Highest valid score ({selected.Score:0.##}). " + string.Join("; ", selected.Factors?.Select(f => f.Description) ?? Array.Empty<string>());
         }
         else
         {

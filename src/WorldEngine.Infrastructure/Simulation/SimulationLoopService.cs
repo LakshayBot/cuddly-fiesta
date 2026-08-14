@@ -149,6 +149,7 @@ public sealed class SimulationLoopService : BackgroundService
                     evt.ActorAgentId,
                     evt.TargetAgentId,
                     evt.LocationId,
+                    evt.Importance,
                     data);
 
                 await broadcaster.BroadcastEventAsync(dto, cancellationToken);

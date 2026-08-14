@@ -2,7 +2,13 @@ using WorldEngine.Domain.Actions;
 
 namespace WorldEngine.Domain.AI;
 
-public sealed record ScoredAction(string ActionId, string ActionType, IAgentAction Action, double Score, string? Reasoning)
+public sealed record ScoredAction(
+    string ActionId,
+    string ActionType,
+    IAgentAction Action,
+    double Score,
+    string? Reasoning,
+    IReadOnlyList<DecisionFactor>? Factors = null)
 {
     public string Describe() => ActionType;
 }

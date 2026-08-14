@@ -38,12 +38,17 @@ public sealed class LLMDecisionEngine : IAgentDecisionEngine
 
         var proposals = _generator.Generate(context);
         var rankedFallback = proposals
-            .Select(p => new ScoredAction(
-                ActionId: p.ActionId,
-                ActionType: p.ActionType,
-                Action: p.Action,
-                Score: DecisionScoring.BaseScore(p, context) + DecisionScoring.PersonalityModifier(p, context),
-                Reasoning: $"base={DecisionScoring.BaseScore(p, context):0.##}+personality={DecisionScoring.PersonalityModifier(p, context):0.##}"))
+            .Select(p =>
+            {
+                var outcome = DecisionScoring.Score(p, context);
+                return new ScoredAction(
+                    ActionId: p.ActionId,
+                    ActionType: p.ActionType,
+                    Action: p.Action,
+                    Score: outcome.Score,
+                    Reasoning: string.Join("; ", outcome.Factors.Select(f => f.Describe())),
+                    Factors: outcome.Factors);
+            })
             .OrderByDescending(s => s.Score)
             .ToList();
 
@@ -76,9 +81,14 @@ public sealed class LLMDecisionEngine : IAgentDecisionEngine
         var selected = new ScoredAction(match.ActionId, match.ActionType, match.Action, Score: 100, Reasoning: parsedActionId);
 
         var llmRanked = proposals
-            .Select(p => new ScoredAction(p.ActionId, p.ActionType, p.Action,
-                Score: p.ActionId == parsedActionId ? 100 : DecisionScoring.BaseScore(p, context) + DecisionScoring.PersonalityModifier(p, context),
-                Reasoning: p.ActionId == parsedActionId ? "Selected by LLM" : null))
+            .Select(p =>
+            {
+                var outcome = DecisionScoring.Score(p, context);
+                return new ScoredAction(p.ActionId, p.ActionType, p.Action,
+                    Score: p.ActionId == parsedActionId ? 100 : outcome.Score,
+                    Reasoning: p.ActionId == parsedActionId ? "Selected by LLM" : string.Join("; ", outcome.Factors.Select(f => f.Describe())),
+                    Factors: outcome.Factors);
+            })
             .OrderByDescending(s => s.Score)
             .ToList();
 

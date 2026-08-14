@@ -1,6 +1,9 @@
 import type {
   Agent,
+  AgentLife,
+  Autopsy,
   Decision,
+  EventDetail,
   Group,
   Health,
   Location,
@@ -9,6 +12,7 @@ import type {
   Settlement,
   SimulationEvent,
   World,
+  WorldHistoryEntry,
 } from './types';
 
 export const API_BASE: string =
@@ -77,4 +81,11 @@ export const api = {
     request<SimulationEvent[]>(`/worlds/${worldId}/events${qs(opts)}`),
   listSettlements: (worldId: string) => request<Settlement[]>(`/worlds/${worldId}/settlements`),
   listGroups: (worldId: string) => request<Group[]>(`/worlds/${worldId}/groups`),
+
+  getEventDetail: (eventId: string) => request<EventDetail>(`/events/${eventId}`),
+  getAgentLife: (agentId: string) => request<AgentLife>(`/agents/${agentId}/life`),
+  getWorldHistory: (worldId: string, opts: { limit?: number; minImportance?: number } = {}) =>
+    request<WorldHistoryEntry[]>(`/worlds/${worldId}/history${qs(opts)}`),
+  getAutopsy: (worldId: string, subject: string) =>
+    request<Autopsy>(`/worlds/${worldId}/autopsy${qs({ subject })}`),
 };

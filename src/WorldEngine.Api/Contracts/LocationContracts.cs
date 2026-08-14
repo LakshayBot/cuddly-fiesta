@@ -1,4 +1,5 @@
 using WorldEngine.Domain.Entities;
+using WorldEngine.Domain.Enums;
 
 namespace WorldEngine.Api.Contracts;
 
@@ -19,6 +20,8 @@ public record SimulationEventResponse(
     Guid? TargetAgentId,
     Guid? LocationId,
     string Data,
+    EventImportance Importance,
+    double ImportanceScore,
     DateTime CreatedAt);
 
 public static class LocationMappings
@@ -42,6 +45,8 @@ public static class LocationMappings
             evt.TargetAgentId,
             evt.LocationId,
             evt.Data,
+            evt.Importance,
+            evt.ImportanceScore,
             evt.CreatedAt);
 }
 
