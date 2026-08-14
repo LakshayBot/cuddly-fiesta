@@ -260,15 +260,24 @@ public sealed class WorldHistorySystem : ISimulationSystem
         EventImportance importance,
         Func<Dictionary<string, string>, string> summarize)
     {
-        Dictionary<string, string> facts;
+        var facts = new Dictionary<string, string>();
         try
         {
-            facts = JsonSerializer.Deserialize<Dictionary<string, string>>(evt.Data)
-                ?? new Dictionary<string, string>();
+            using var doc = JsonDocument.Parse(evt.Data);
+            foreach (var prop in doc.RootElement.EnumerateObject())
+            {
+                facts[prop.Name] = prop.Value.ValueKind switch
+                {
+                    JsonValueKind.String => prop.Value.GetString() ?? string.Empty,
+                    JsonValueKind.Number => prop.Value.GetRawText(),
+                    JsonValueKind.True => "true",
+                    JsonValueKind.False => "false",
+                    _ => prop.Value.GetRawText(),
+                };
+            }
         }
         catch (JsonException)
         {
-            facts = new Dictionary<string, string>();
         }
 
         return new WorldHistoryEntry
