@@ -12,6 +12,7 @@ public class WorldDbContextTests
     {
         var options = new DbContextOptionsBuilder<WorldEngineDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .ConfigureWarnings(w => w.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.ManyServiceProvidersCreatedWarning))
             .Options;
 
         var now = DateTime.UtcNow;
