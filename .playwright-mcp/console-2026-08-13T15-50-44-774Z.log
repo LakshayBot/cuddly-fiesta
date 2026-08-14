@@ -1,9 +1,0 @@
-[     399ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=ffd07c61:14333
-[   15686ms] [INFO] [2026-08-13T15:51:00.459Z] Information: Normalizing '/hubs/simulation' to 'http://localhost:5173/hubs/simulation'. @ http://localhost:5173/node_modules/.vite/deps/@microsoft_signalr.js?v=ffd07c61:308
-[   15695ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/hubs/simulation/negotiate?negotiateVersion=1:0
-[   15695ms] [ERROR] [2026-08-13T15:51:00.469Z] Error: Failed to complete negotiation with the server: Error: Not Found: Status code '404' Either this is not a SignalR endpoint or there is a proxy blocking the connection. @ http://localhost:5173/node_modules/.vite/deps/@microsoft_signalr.js?v=ffd07c61:302
-[   15696ms] [ERROR] [2026-08-13T15:51:00.469Z] Error: Failed to start the connection: Error: Failed to complete negotiation with the server: Error: Not Found: Status code '404' Either this is not a SignalR endpoint or there is a proxy blocking the connection. @ http://localhost:5173/node_modules/.vite/deps/@microsoft_signalr.js?v=ffd07c61:302
-[   37222ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:998
-[   38287ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=ffd07c61:14333
-[   45382ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:998
-[   47820ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=ffd07c61:14333

@@ -24,3 +24,4 @@ appsettings.Local.json
 src/**/Persistence/Migrations/*Designer.cs.playwright-mcp/
 phase7-*.png
 phase7-*.jpeg
+.playwright-mcp/
